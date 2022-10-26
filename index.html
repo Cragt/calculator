@@ -11,32 +11,32 @@
     <h1>Calculator Project</h1>
     <div class="container">
         <div class="header">Calculator</div>
-        <input type="text" id="display" value="0"/>
+        <input type="text" id="display" value="0"></input>
       <div class="first-row">
-          <button value="7">7</button>
-          <button value="8">8</button>
-          <button value="9">9</button>
-          <button value="/">/</button>
-        </div>
-        <div class="second-row">
-        <button>4</button>
-        <button>5</button>
-        <button>6</button>
-        <button>*</button>
-    </div>
+          <button data-number>7</button>
+          <button data-number>8</button>
+          <button data-number>9</button>
+          <button data-operator>/</button>
+      </div>
+      <div class="second-row">
+          <button data-number>4</button>
+          <button data-number>5</button>
+          <button data-number>6</button>
+          <button data-operator>*</button>
+      </div>
       <div class="third-row">
-          <button>1</button>
-          <button>2</button>
-          <button>3</button>
-          <button>-</button>
-        </div>
-        <div class="fourth-row">
-            <button onclick="myFunction()" value="c">C</button>
-            <button>0</button>
-            <button>=</button>
-            <button>+</button?
-            </div>
-        </div>
+          <button data-number>1</button>
+          <button data-number>2</button>
+          <button data-number>3</button>
+          <button data-operator>-</button>
+      </div>
+      <div class="fourth-row">
+            <button data-clear>C</button>
+            <button data-number>0</button>
+            <button data-equals>=</button>
+            <button data-operator>+</button>
+      </div>
+    </div>
         <script src="script.js"></script>
   </body>
 </html>
