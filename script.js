@@ -1,8 +1,10 @@
 const display = document.getElementById("display");
 const numPad = document.querySelectorAll("[data-number]");
-const operators = document.querySelectorAll("[data-operator]");
+const operatorButton = document.querySelectorAll("[data-operator]");
 const clear = document.querySelectorAll("[data-clear]");
-let firstNum = display.value;
+let firstNum;
+let operator = "";
+
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -21,12 +23,15 @@ numPad.forEach((button) =>
     if (display.value === "0") {
       clearDisplay();
     }
-    appendNumber(button.textContent);
+    display.value += (button.textContent);
   })
 );
 
-operators.forEach((button) =>
-  button.addEventListener("click", () => (firstNum = button.value))
+operatorButton.forEach((button) =>
+  button.addEventListener("click", () => {
+    firstNum = display.value,
+    operator = button.textContent
+  })
 );
 
 clear.forEach((button) =>
