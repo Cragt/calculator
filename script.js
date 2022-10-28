@@ -2,9 +2,11 @@ const display = document.getElementById("display");
 const numPad = document.querySelectorAll("[data-number]");
 const operatorButton = document.querySelectorAll("[data-operator]");
 const clear = document.querySelectorAll("[data-clear]");
-let firstNum;
-let operator = "";
-
+const equals = document.querySelectorAll("[data-equals]");
+let firstNum = null;
+let secondNum = null;
+let operator = null;
+let lastPress = null;
 
 const add = (a, b) => a + b;
 const subtract = (a, b) => a - b;
@@ -22,28 +24,43 @@ numPad.forEach((button) =>
   button.addEventListener("click", () => {
     if (display.value === "0") {
       clearDisplay();
+      display.value += button.textContent;
+      lastPress = button.textContent;
+    } else if (lastPress === operator) {
+      clearDisplay();
+      display.value += button.textContent;
+      lastPress = button.textContent;
+    } else {
+      display.value += button.textContent;
+      lastPress = button.textContent;
     }
-    display.value += (button.textContent);
   })
 );
 
 operatorButton.forEach((button) =>
   button.addEventListener("click", () => {
-    firstNum = display.value,
-    operator = button.textContent
+    (firstNum = display.value), (operator = button.textContent);
+    lastPress = button.textContent;
   })
 );
 
-clear.forEach((button) =>
-  button.addEventListener("click", () => clearDisplay())
-);
+clear.forEach((button) => button.addEventListener("click", () => initialize()));
 
-function appendNumber(number) {
-  display.value += number;
-}
+equals.forEach((button) => button.addEventListener("click", () => equal()));
 
 function clearDisplay() {
-  display.value = "";
+  display.value = null;
+}
+
+function initialize() {
+  display.value = 0;
+  firstNum = null;
+}
+
+function equal() {
+  secondNum = display.value;
+  console.log(operate(firstNum, operator, secondNum));
 }
 
 console.log(firstNum);
+//Fix equals
