@@ -40,19 +40,24 @@ numPad.forEach((button) =>
 
 operatorButton.forEach((button) =>
   button.addEventListener("click", () => {
-    if (firstNum === null) {
-      firstNum = display.value;
-      operator = button.textContent;
-      lastPress = button.textContent;
-    } else if (firstNum !== null && secondNum !== null) {
-      equal();
+    if (lastPress === operator) {
       operator = button.textContent;
       lastPress = button.textContent;
     } else {
-      secondNum = display.value;
-      equal();
-      operator = button.textContent;
-      lastPress = button.textContent;
+      if (firstNum === null && secondNum === null) {
+        firstNum = display.value;
+        operator = button.textContent;
+        lastPress = button.textContent;
+      } else if (firstNum !== null && secondNum !== null) {
+        equal();
+        operator = button.textContent;
+        lastPress = button.textContent;
+      } else {
+        secondNum = display.value;
+        equal();
+        operator = button.textContent;
+        lastPress = button.textContent;
+      }
     }
   })
 );
@@ -62,7 +67,7 @@ clear.forEach((button) => button.addEventListener("click", () => initialize()));
 equals.forEach((button) =>
   button.addEventListener("click", () => {
     equal();
-    lastPress = "=";
+    lastPress = button.textContent;
   })
 );
 
@@ -76,6 +81,7 @@ function initialize() {
   secondNum = null;
   temp = null;
   lastPress = null;
+  operator = null;
 }
 
 function equal() {
@@ -88,4 +94,5 @@ function equal() {
     secondNum = display.value;
     display.value = operate(temp, operator, secondNum);
   }
+  firstNum = null;
 }
