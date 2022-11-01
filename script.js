@@ -3,6 +3,8 @@ const numPad = document.querySelectorAll("[data-number]");
 const operatorButton = document.querySelectorAll("[data-operator]");
 const clear = document.querySelectorAll("[data-clear]");
 const equals = document.querySelectorAll("[data-equals]");
+const decimal = document.querySelectorAll("[data-decimal");
+const ac = document.querySelectorAll("[data-ac]");
 let firstNum = null;
 let secondNum = null;
 let operator = null;
@@ -15,10 +17,10 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const operate = (a, operator, b) => {
-  if (operator === "+") return (temp = Number(a) + Number(b)).toFixed(4);
-  if (operator === "-") return (temp = a - b).toFixed(4);
-  if (operator === "*") return (temp = a * b).toFixed(4);
-  if (operator === "/") return (temp = a / b).toFixed(4);
+  if (operator === "+") return Math.round((temp = Number(a) + Number(b)) * 10) / 10;
+  if (operator === "-") return Math.round((temp = a - b) * 10) / 10;
+  if (operator === "*") return Math.round((temp = a * b) * 10) / 10;
+  if (operator === "/") return Math.round((temp = a / b) * 10) / 10;
 };
 
 numPad.forEach((button) =>
@@ -43,6 +45,10 @@ operatorButton.forEach((button) =>
     if (lastPress === operator) {
       operator = button.textContent;
       lastPress = button.textContent;
+    } else if (lastPress === "=") {
+      operator = button.textContent;
+      lastPress = button.textContent;
+      firstNum = display.value;
     } else {
       if (firstNum === null && secondNum === null) {
         firstNum = display.value;
@@ -64,9 +70,21 @@ operatorButton.forEach((button) =>
 
 clear.forEach((button) => button.addEventListener("click", () => initialize()));
 
+ac.forEach((button) => button.addEventListener("click", () => clearDisplay()));
+
 equals.forEach((button) =>
   button.addEventListener("click", () => {
     equal();
+    lastPress = button.textContent;
+  })
+);
+
+decimal.forEach((button) =>
+  button.addEventListener("click", () => {
+    if (lastPress === operator || lastPress === "=" || lastPress === "." || display.value.includes(".")) {
+      return;
+    };
+    display.value += (".");
     lastPress = button.textContent;
   })
 );
@@ -85,7 +103,6 @@ function initialize() {
 }
 
 function equal() {
-  
   if (temp === null) {
     secondNum = display.value;
     display.value = operate(firstNum, operator, secondNum);
@@ -95,7 +112,7 @@ function equal() {
     secondNum = display.value;
     display.value = operate(temp, operator, secondNum);
   }
-  
+
   if (display.value === "undefined" || display.value === "NaN") {
     display.value = "Error";
   } else if (display.value === "Infinity") {
