@@ -85,6 +85,7 @@ function initialize() {
 }
 
 function equal() {
+  
   if (temp === null) {
     secondNum = display.value;
     display.value = operate(firstNum, operator, secondNum);
@@ -94,5 +95,12 @@ function equal() {
     secondNum = display.value;
     display.value = operate(temp, operator, secondNum);
   }
+  
+  if (display.value === "undefined" || display.value === "NaN") {
+    display.value = "Error";
+  } else if (display.value === "Infinity") {
+    display.value = "Lol";
+  }
+
   firstNum = null;
 }
