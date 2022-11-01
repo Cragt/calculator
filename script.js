@@ -15,10 +15,10 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const operate = (a, operator, b) => {
-  if (operator === "+") return (temp = Number(a) + Number(b));
-  if (operator === "-") return (temp = a - b);
-  if (operator === "*") return (temp = a * b);
-  if (operator === "/") return (temp = a / b);
+  if (operator === "+") return (temp = Number(a) + Number(b)).toFixed(4);
+  if (operator === "-") return (temp = a - b).toFixed(4);
+  if (operator === "*") return (temp = a * b).toFixed(4);
+  if (operator === "/") return (temp = a / b).toFixed(4);
 };
 
 numPad.forEach((button) =>
