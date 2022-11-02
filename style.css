@@ -3,17 +3,26 @@ html {
 }
 
 * {
-  /* border: solid red; */
   box-sizing: border-box;
 }
 
 #display {
   /* background-color: aqua; */
   border: solid;
+  text-align: right;
+  font-size: 30px;
+  width: 250px;
+  height: 50px;
+  margin-top: 4px;
 }
 
 div.header {
-  align-self: flex-start;
+  display: flex;
+}
+
+div.make {
+  margin-right: 20px;
+  margin-left: 4px;
 }
 
 body {
@@ -27,7 +36,7 @@ body {
   flex-direction: column;
   align-items: center;
   border: solid;
-  background-color: #cec6b9; 
+  background-color: #cec6b9;
   width: fit-content;
   padding: 50px;
   border-radius: 5%;
@@ -43,10 +52,21 @@ button {
   border-radius: 20%;
   margin: 1px;
   margin-top: 10px;
+  transition: 0.2s all;
 }
 
-button.clear, .equal {
-width: 105px;
+button:active {
+  transform: scale(0.97);
+  box-shadow: 3px 2px 22px 1px rgba(0, 0, 0, 0.24);
+}
+
+img {
+  width: 20px;
+}
+
+button.clear,
+.equal {
+  width: 105px;
 }
 
 .operator {
