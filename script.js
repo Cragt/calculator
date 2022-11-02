@@ -5,6 +5,8 @@ const clear = document.querySelectorAll("[data-clear]");
 const equals = document.querySelectorAll("[data-equals]");
 const decimal = document.querySelectorAll("[data-decimal");
 const ac = document.querySelectorAll("[data-ac]");
+const click = document.querySelectorAll("button");
+const sound = document.getElementById("play");
 let firstNum = null;
 let secondNum = null;
 let operator = null;
@@ -17,7 +19,8 @@ const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
 const operate = (a, operator, b) => {
-  if (operator === "+") return Math.round((temp = Number(a) + Number(b)) * 10) / 10;
+  if (operator === "+")
+    return Math.round((temp = Number(a) + Number(b)) * 10) / 10;
   if (operator === "-") return Math.round((temp = a - b) * 10) / 10;
   if (operator === "*") return Math.round((temp = a * b) * 10) / 10;
   if (operator === "/") return Math.round((temp = a / b) * 10) / 10;
@@ -81,10 +84,15 @@ equals.forEach((button) =>
 
 decimal.forEach((button) =>
   button.addEventListener("click", () => {
-    if (lastPress === operator || lastPress === "=" || lastPress === "." || display.value.includes(".")) {
+    if (
+      lastPress === operator ||
+      lastPress === "=" ||
+      lastPress === "." ||
+      display.value.includes(".")
+    ) {
       return;
-    };
-    display.value += (".");
+    }
+    display.value += ".";
     lastPress = button.textContent;
   })
 );
@@ -102,6 +110,26 @@ function initialize() {
   operator = null;
 }
 
+click.forEach((button) => {
+  button.addEventListener("click", () => {
+    playSound();
+  });
+});
+
+function playSound() {
+  sound.play();
+}
+
+function toggleMute() {
+  sound.muted = !sound.muted;
+  let img = document.getElementById("mute").src;
+  if (img.indexOf("audible.png") != -1) {
+    document.getElementById("mute").src = "muted.png";
+  } else {
+    document.getElementById("mute").src = "audible.png";
+  }
+}
+
 function equal() {
   if (temp === null) {
     secondNum = display.value;
@@ -112,7 +140,6 @@ function equal() {
     secondNum = display.value;
     display.value = operate(temp, operator, secondNum);
   }
-
   if (display.value === "undefined" || display.value === "NaN") {
     display.value = "Error";
   } else if (display.value === "Infinity") {
@@ -120,4 +147,4 @@ function equal() {
   }
 
   firstNum = null;
-};
+}

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8" />
-      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Calculator</title>
-      <link rel="stylesheet" href="style.css" />
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css" />
+    <audio id="play" src="click.mp3"></audio>
     </head>
     <body>
     <h1>Calculator</h1>
@@ -46,6 +47,7 @@
             <button class="equal" data-equals>=</button>
       </div>
     </div>
-        <script src="script.js"></script>
+    <img onclick="toggleMute()" id="mute" src="audible.png" alt="Mute audio"/>
+    <script src="script.js"></script>
   </body>
 </html>
