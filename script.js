@@ -120,4 +120,4 @@ function equal() {
   }
 
   firstNum = null;
-}
+};
