@@ -2,12 +2,7 @@ html {
   background-color: gray;
 }
 
-* {
-  box-sizing: border-box;
-}
-
 #display {
-  /* background-color: aqua; */
   border: solid;
   text-align: right;
   font-size: 30px;
