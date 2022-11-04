@@ -8,4 +8,4 @@ Things to note:
 
 2. I'd like to implement a "second" display above the main one that shows the operation being performed.
 
-3. Enable keypress functionality.
+3. I'd like to enable keypress functionality in the future.
