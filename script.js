@@ -34,52 +34,47 @@ equals.addEventListener("click", equalButton);
 decimal.addEventListener("click", decimalButton);
 
 function operate(a, operator, b) {
-  if (operator === "+")
-    return Math.round((temp = Number(a) + Number(b)) * 10) / 10;
-  if (operator === "-") return Math.round((temp = a - b) * 10) / 10;
-  if (operator === "*") return Math.round((temp = a * b) * 10) / 10;
-  if (operator === "/") return Math.round((temp = a / b) * 10) / 10;
+  a = Number(a);
+  b = Number(b);
+  switch (operator) {
+    case "+":
+      return (temp = add(a, b));
+    case "-":
+      return (temp = subtract(a, b));
+    case "*":
+      return (temp = multiply(a, b));
+    case "/":
+      return (temp = divide(a, b));
+  }
 }
 
 function selectNumber(number) {
   if (display.value === "0") {
     clearDisplay();
-    display.value += number.textContent;
-    lastPress = number.textContent;
   } else if (lastPress === operator || lastPress === "=") {
     clearDisplay();
-    display.value += number.textContent;
-    lastPress = number.textContent;
   } else {
-    display.value += number.textContent;
-    lastPress = number.textContent;
   }
+  display.value += number.textContent;
+  lastPress = number.textContent;
 }
 
 function selectOperator(button) {
-  if (lastPress === operator) {
-    operator = button.textContent;
-    lastPress = button.textContent;
-  } else if (lastPress === "=") {
-    operator = button.textContent;
-    lastPress = button.textContent;
+  const { textContent } = button;
+  if (lastPress === "=") {
     firstNum = display.value;
   } else {
     if (firstNum === null && secondNum === null) {
       firstNum = display.value;
-      operator = button.textContent;
-      lastPress = button.textContent;
     } else if (firstNum !== null && secondNum !== null) {
       equal();
-      operator = button.textContent;
-      lastPress = button.textContent;
     } else {
       secondNum = display.value;
       equal();
-      operator = button.textContent;
-      lastPress = button.textContent;
     }
   }
+  operator = textContent;
+  lastPress = textContent;
 }
 
 function equalButton() {
@@ -87,7 +82,7 @@ function equalButton() {
   lastPress = "=";
 }
 
-function decimalButton(button) {
+function decimalButton() {
   if (
     lastPress === operator ||
     lastPress === "=" ||
@@ -143,5 +138,6 @@ function equal() {
   } else if (display.value === "Infinity") {
     display.value = "Lol";
   }
+  display.value = Math.round(display.value * 100) / 100;
   firstNum = null;
 }
