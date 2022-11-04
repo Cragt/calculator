@@ -1,10 +1,10 @@
 const display = document.getElementById("display");
 const numPad = document.querySelectorAll("[data-number]");
 const operatorButton = document.querySelectorAll("[data-operator]");
-const clear = document.querySelectorAll("[data-clear]");
-const equals = document.querySelectorAll("[data-equals]");
-const decimal = document.querySelectorAll("[data-decimal");
-const ac = document.querySelectorAll("[data-ac]");
+const clear = document.getElementById("clear");
+const equals = document.getElementById("equal");
+const decimal = document.getElementById("decimal");
+const ac = document.getElementById("ac");
 const click = document.querySelectorAll("button");
 const sound = document.getElementById("play");
 let firstNum = null;
@@ -18,84 +18,87 @@ const subtract = (a, b) => a - b;
 const multiply = (a, b) => a * b;
 const divide = (a, b) => a / b;
 
-const operate = (a, operator, b) => {
+numPad.forEach((button) =>
+  button.addEventListener("click", () => selectNumber(button))
+);
+
+operatorButton.forEach((button) =>
+  button.addEventListener("click", () => selectOperator(button))
+);
+
+click.forEach((button) => button.addEventListener("click", playSound));
+
+clear.addEventListener("click", initialize);
+ac.addEventListener("click", clearDisplay);
+equals.addEventListener("click", equalButton);
+decimal.addEventListener("click", decimalButton);
+
+function operate(a, operator, b) {
   if (operator === "+")
     return Math.round((temp = Number(a) + Number(b)) * 10) / 10;
   if (operator === "-") return Math.round((temp = a - b) * 10) / 10;
   if (operator === "*") return Math.round((temp = a * b) * 10) / 10;
   if (operator === "/") return Math.round((temp = a / b) * 10) / 10;
-};
+}
 
-numPad.forEach((button) =>
-  button.addEventListener("click", () => {
-    if (display.value === "0") {
-      clearDisplay();
-      display.value += button.textContent;
-      lastPress = button.textContent;
-    } else if (lastPress === operator || lastPress === "=") {
-      clearDisplay();
-      display.value += button.textContent;
-      lastPress = button.textContent;
-    } else {
-      display.value += button.textContent;
-      lastPress = button.textContent;
-    }
-  })
-);
+function selectNumber(number) {
+  if (display.value === "0") {
+    clearDisplay();
+    display.value += number.textContent;
+    lastPress = number.textContent;
+  } else if (lastPress === operator || lastPress === "=") {
+    clearDisplay();
+    display.value += number.textContent;
+    lastPress = number.textContent;
+  } else {
+    display.value += number.textContent;
+    lastPress = number.textContent;
+  }
+}
 
-operatorButton.forEach((button) =>
-  button.addEventListener("click", () => {
-    if (lastPress === operator) {
-      operator = button.textContent;
-      lastPress = button.textContent;
-    } else if (lastPress === "=") {
-      operator = button.textContent;
-      lastPress = button.textContent;
+function selectOperator(button) {
+  if (lastPress === operator) {
+    operator = button.textContent;
+    lastPress = button.textContent;
+  } else if (lastPress === "=") {
+    operator = button.textContent;
+    lastPress = button.textContent;
+    firstNum = display.value;
+  } else {
+    if (firstNum === null && secondNum === null) {
       firstNum = display.value;
+      operator = button.textContent;
+      lastPress = button.textContent;
+    } else if (firstNum !== null && secondNum !== null) {
+      equal();
+      operator = button.textContent;
+      lastPress = button.textContent;
     } else {
-      if (firstNum === null && secondNum === null) {
-        firstNum = display.value;
-        operator = button.textContent;
-        lastPress = button.textContent;
-      } else if (firstNum !== null && secondNum !== null) {
-        equal();
-        operator = button.textContent;
-        lastPress = button.textContent;
-      } else {
-        secondNum = display.value;
-        equal();
-        operator = button.textContent;
-        lastPress = button.textContent;
-      }
+      secondNum = display.value;
+      equal();
+      operator = button.textContent;
+      lastPress = button.textContent;
     }
-  })
-);
+  }
+}
 
-clear.forEach((button) => button.addEventListener("click", () => initialize()));
+function equalButton() {
+  equal();
+  lastPress = "=";
+}
 
-ac.forEach((button) => button.addEventListener("click", () => clearDisplay()));
-
-equals.forEach((button) =>
-  button.addEventListener("click", () => {
-    equal();
-    lastPress = button.textContent;
-  })
-);
-
-decimal.forEach((button) =>
-  button.addEventListener("click", () => {
-    if (
-      lastPress === operator ||
-      lastPress === "=" ||
-      lastPress === "." ||
-      display.value.includes(".")
-    ) {
-      return;
-    }
-    display.value += ".";
-    lastPress = button.textContent;
-  })
-);
+function decimalButton(button) {
+  if (
+    lastPress === operator ||
+    lastPress === "=" ||
+    lastPress === "." ||
+    display.value.includes(".")
+  ) {
+    return;
+  }
+  display.value += ".";
+  lastPress = decimal.textContent;
+}
 
 function clearDisplay() {
   display.value = null;
@@ -110,13 +113,8 @@ function initialize() {
   operator = null;
 }
 
-click.forEach((button) => {
-  button.addEventListener("click", () => {
-    playSound();
-  });
-});
-
 function playSound() {
+  sound.currentTime = 0;
   sound.play();
 }
 
@@ -145,6 +143,5 @@ function equal() {
   } else if (display.value === "Infinity") {
     display.value = "Lol";
   }
-
   firstNum = null;
 }

@@ -7,47 +7,46 @@
     <title>Calculator</title>
     <link rel="stylesheet" href="style.css" />
     <audio id="play" src="click.mp3"></audio>
-    </head>
-    <body>
+  </head>
+  <body>
     <h1>Calculator</h1>
     <div class="container">
-        <div class="header"><img src="logo.png" alt="Logo of guitar"> 
-          <div class="make">Texas Instruments
-          </div>
-          <div class="model">TI-19 
-          </div>
-        </div>
-        <input type="text" id="display" value="0"></input>
+      <div class="header">
+        <img src="logo.png" alt="Logo of guitar" />
+        <div class="make">Texas Instruments</div>
+        <div class="model">TI-19</div>
+      </div>
+      <input type="text" id="display" value="0" />
       <div class="first-row">
-          <button data-number>7</button>
-          <button data-number>8</button>
-          <button data-number>9</button>
-          <button class="operator" data-operator>/</button>
+        <button data-number>7</button>
+        <button data-number>8</button>
+        <button data-number>9</button>
+        <button class="operator" data-operator>/</button>
       </div>
       <div class="second-row">
-          <button data-number>4</button>
-          <button data-number>5</button>
-          <button data-number>6</button>
-          <button class="operator" data-operator>*</button>
+        <button data-number>4</button>
+        <button data-number>5</button>
+        <button data-number>6</button>
+        <button class="operator" data-operator>*</button>
       </div>
       <div class="third-row">
-          <button data-number>1</button>
-          <button data-number>2</button>
-          <button data-number>3</button>
-          <button class="operator" data-operator>-</button>
+        <button data-number>1</button>
+        <button data-number>2</button>
+        <button data-number>3</button>
+        <button class="operator" data-operator>-</button>
       </div>
       <div class="fourth-row">
-        <button data-ac>AC</button>
+        <button id="ac">AC</button>
         <button data-number>0</button>
-        <button data-decimal>.</button>
+        <button id="decimal">.</button>
         <button class="operator" data-operator>+</button>
       </div>
       <div class="fifth-row">
-            <button class="clear" data-clear>C</button>
-            <button class="equal" data-equals>=</button>
+        <button class="clear" id="clear">C</button>
+        <button class="equal" id="equal">=</button>
       </div>
     </div>
-    <img onclick="toggleMute()" id="mute" src="audible.png" alt="Mute audio"/>
+    <img onclick="toggleMute()" id="mute" src="audible.png" alt="Mute audio" />
     <script src="script.js"></script>
   </body>
 </html>
