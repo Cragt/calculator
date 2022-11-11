@@ -60,8 +60,8 @@ function selectNumber(number) {
 }
 
 function selectOperator(button) {
-  const { textContent } = button;
-  if (lastPress === "=") {
+  if (lastPress === operator) {
+  } else if (lastPress === "=") {
     firstNum = display.value;
   } else {
     if (firstNum === null && secondNum === null) {
@@ -73,8 +73,8 @@ function selectOperator(button) {
       equal();
     }
   }
-  operator = textContent;
-  lastPress = textContent;
+  operator = button.textContent;
+  lastPress = button.textContent;
 }
 
 function equalButton() {
@@ -126,18 +126,19 @@ function toggleMute() {
 function equal() {
   if (temp === null) {
     secondNum = display.value;
-    display.value = operate(firstNum, operator, secondNum);
+    display.value =
+      Math.round(operate(firstNum, operator, secondNum) * 100) / 100;
   } else if (lastPress === "=") {
-    display.value = operate(temp, operator, secondNum);
+    display.value = Math.round(operate(temp, operator, secondNum) * 100) / 100;
   } else {
     secondNum = display.value;
-    display.value = operate(temp, operator, secondNum);
+    display.value = Math.round(operate(temp, operator, secondNum) * 100) / 100;
   }
   if (display.value === "undefined" || display.value === "NaN") {
     display.value = "Error";
+    console.log("4");
   } else if (display.value === "Infinity") {
     display.value = "Lol";
   }
-  display.value = Math.round(display.value * 100) / 100;
   firstNum = null;
 }
