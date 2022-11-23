@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
 html {
   background-color: gray;
 }
@@ -21,6 +23,7 @@ div.make {
 }
 
 body {
+  font-family: "Roboto", sans-serif;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -48,6 +51,11 @@ button {
   margin: 1px;
   margin-top: 10px;
   transition: 0.2s all;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(150%);
 }
 
 button:active {
@@ -57,6 +65,10 @@ button:active {
 
 img {
   width: 20px;
+}
+
+#mute {
+  cursor: pointer;
 }
 
 button.clear,
